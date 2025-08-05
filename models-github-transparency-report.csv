@@ -1,0 +1,12 @@
+Field,Value
+App Name,Models (GitHub)
+Listing Type,Copilot Extension
+Developer,Copilot Extensions
+Publisher 2FA Required,Yes - Publisher organization requires 2FA
+Company Domain,github.com
+EU Trader,No - Does not classify as a trader in the European Union
+Required Permissions,read:models; read:copilot_editor_context; read:copilot_chat; read:models
+Indemnity Status,Not covered by Microsoft's indemnity policy. All other Copilot features retain indemnity coverage.
+Support URL,https://support.github.com
+Privacy Policy URL,https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+Terms of Service URL,https://docs.github.com/site-policy/github-terms/github-terms-of-service
