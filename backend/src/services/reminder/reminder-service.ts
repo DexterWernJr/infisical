@@ -42,7 +42,7 @@ export const reminderServiceFactory = ({
   const $manageReminderRecipients = async (reminderId: string, newRecipients?: string[] | null): Promise<void> => {
     if (!newRecipients || newRecipients.length === 0) {
       // If no recipients provided, remove all existing recipients
-      await reminderRecipientDAL.deleteById(reminderId);
+      await reminderRecipientDAL.delete({ reminderId });
       return;
     }
 
@@ -372,6 +372,21 @@ export const reminderServiceFactory = ({
     };
   };
 
+  const getRemindersForDashboard: TReminderServiceFactory["getRemindersForDashboard"] = async (secretIds) => {
+    // scott we don't need to check permissions/secret existence because these are the
+    // secrets from the dashboard that have already gone through these checks
+
+    const reminders = await reminderDAL.findSecretReminders(secretIds);
+
+    const reminderMap: Record<string, (typeof reminders)[number]> = {};
+
+    reminders.forEach((reminder) => {
+      if (reminder.secretId) reminderMap[reminder.secretId] = reminder;
+    });
+
+    return reminderMap;
+  };
+
   return {
     createReminder,
     getReminder,
@@ -379,6 +394,7 @@ export const reminderServiceFactory = ({
     deleteReminder,
     deleteReminderBySecretId,
     batchCreateReminders,
-    createReminderInternal
+    createReminderInternal,
+    getRemindersForDashboard
   };
 };

@@ -79,7 +79,7 @@ type TOidcConfigServiceFactoryDep = {
   >;
   groupProjectDAL: Pick<TGroupProjectDALFactory, "find">;
   projectKeyDAL: Pick<TProjectKeyDALFactory, "find" | "findLatestProjectKey" | "insertMany" | "delete">;
-  projectDAL: Pick<TProjectDALFactory, "findProjectGhostUser">;
+  projectDAL: Pick<TProjectDALFactory, "findProjectGhostUser" | "findById">;
   projectBotDAL: Pick<TProjectBotDALFactory, "findOne">;
   auditLogService: Pick<TAuditLogServiceFactory, "createAuditLog">;
   kmsService: Pick<TKmsServiceFactory, "createCipherPairWithDataKey">;
@@ -404,7 +404,6 @@ export const oidcConfigServiceFactory = ({
 
     await licenseService.updateSubscriptionOrgMemberCount(organization.id);
 
-    const userEnc = await userDAL.findUserEncKeyByUserId(user.id);
     const isUserCompleted = Boolean(user.isAccepted);
     const providerAuthToken = crypto.jwt().sign(
       {
@@ -417,7 +416,7 @@ export const oidcConfigServiceFactory = ({
         organizationName: organization.name,
         organizationId: organization.id,
         organizationSlug: organization.slug,
-        hasExchangedPrivateKey: Boolean(userEnc?.serverEncryptedPrivateKey),
+        hasExchangedPrivateKey: true,
         authMethod: AuthMethod.OIDC,
         authType: UserAliasType.OIDC,
         isUserCompleted,

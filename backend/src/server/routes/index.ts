@@ -45,6 +45,8 @@ import { groupServiceFactory } from "@app/ee/services/group/group-service";
 import { userGroupMembershipDALFactory } from "@app/ee/services/group/user-group-membership-dal";
 import { hsmServiceFactory } from "@app/ee/services/hsm/hsm-service";
 import { HsmModule } from "@app/ee/services/hsm/hsm-types";
+import { identityAuthTemplateDALFactory } from "@app/ee/services/identity-auth-template/identity-auth-template-dal";
+import { identityAuthTemplateServiceFactory } from "@app/ee/services/identity-auth-template/identity-auth-template-service";
 import { identityProjectAdditionalPrivilegeDALFactory } from "@app/ee/services/identity-project-additional-privilege/identity-project-additional-privilege-dal";
 import { identityProjectAdditionalPrivilegeServiceFactory } from "@app/ee/services/identity-project-additional-privilege/identity-project-additional-privilege-service";
 import { identityProjectAdditionalPrivilegeV2ServiceFactory } from "@app/ee/services/identity-project-additional-privilege-v2/identity-project-additional-privilege-v2-service";
@@ -179,8 +181,6 @@ import { identityAccessTokenDALFactory } from "@app/services/identity-access-tok
 import { identityAccessTokenServiceFactory } from "@app/services/identity-access-token/identity-access-token-service";
 import { identityAliCloudAuthDALFactory } from "@app/services/identity-alicloud-auth/identity-alicloud-auth-dal";
 import { identityAliCloudAuthServiceFactory } from "@app/services/identity-alicloud-auth/identity-alicloud-auth-service";
-import { identityAuthTemplateDALFactory } from "@app/ee/services/identity-auth-template/identity-auth-template-dal";
-import { identityAuthTemplateServiceFactory } from "@app/ee/services/identity-auth-template/identity-auth-template-service";
 import { identityAwsAuthDALFactory } from "@app/services/identity-aws-auth/identity-aws-auth-dal";
 import { identityAwsAuthServiceFactory } from "@app/services/identity-aws-auth/identity-aws-auth-service";
 import { identityAzureAuthDALFactory } from "@app/services/identity-azure-auth/identity-azure-auth-dal";
@@ -775,7 +775,6 @@ export const registerRoutes = async (
     orgRoleDAL,
     permissionService,
     orgDAL,
-    projectBotDAL,
     incidentContactDAL,
     tokenService,
     projectUserAdditionalPrivilegeDAL,
@@ -850,9 +849,6 @@ export const registerRoutes = async (
     projectDAL,
     permissionService,
     projectUserMembershipRoleDAL,
-    userDAL,
-    projectBotDAL,
-    projectKeyDAL,
     projectMembershipDAL
   });
 
@@ -1138,11 +1134,9 @@ export const registerRoutes = async (
     projectBotService,
     identityProjectDAL,
     identityOrgMembershipDAL,
-    projectKeyDAL,
     userDAL,
     projectEnvDAL,
     orgDAL,
-    orgService,
     projectMembershipDAL,
     projectRoleDAL,
     folderDAL,
@@ -1162,7 +1156,6 @@ export const registerRoutes = async (
     identityProjectMembershipRoleDAL,
     keyStore,
     kmsService,
-    projectBotDAL,
     certificateTemplateDAL,
     projectSlackConfigDAL,
     slackIntegrationDAL,
